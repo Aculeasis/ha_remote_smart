@@ -1,6 +1,6 @@
 #include <tunables/global>
 
-profile ha_remote_smart flags=(attach_disconnected,mediate_deleted) {
+profile ee3352c2_ha_remote_smart flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
 
   capability,

@@ -26,14 +26,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-#      - name: Docker meta
-#        id: meta
-#        uses: docker/metadata-action@v5
-#        with:
-#          images: ghcr.io/${{ github.repository }}
-#          tags: |
-#            type=raw,value=${{ github.event.inputs.tag }} # Use the manually provided tag
-
       - name: Build and push Docker image
         id: build-push
         uses: home-assistant/builder@2025.03.0
