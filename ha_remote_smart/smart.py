@@ -3,7 +3,7 @@ import subprocess
 from datetime import datetime, timedelta
 from typing import Optional
 
-from utils import relative_time
+from utils import relative_time, pretty_size
 
 _UN = 'unavailable'
 
@@ -26,7 +26,7 @@ def _parse_smart(code: int, data_: dict, missing_attribute: bool) -> tuple[str, 
             'Last updated': f'{datetime.now():%H:%M, %d.%m.%Y}',
             'Model name': data_['model_name'],
             'Device': data_['device']['name'],
-            'Size': f'{round(data_["user_capacity"]["bytes"] / 1000000000000, 2)} TB',
+            'Size': pretty_size(data_["user_capacity"]["bytes"]),
             'temperature': data_['temperature']['current'],
             'Smart status': 'Healthy' if data_['smart_status']['passed'] else 'Failed',
         }

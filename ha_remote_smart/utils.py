@@ -83,6 +83,18 @@ class SignalHandler:
             time.sleep(self._death_time)
 
 
+def pretty_size(size: int, divider: int = 1000) -> str:
+    def pretty_round(size_: float) -> float | int:
+        return round(size_, 2) if size_ % 1 >= 0.1 else int(size_)
+
+    units = ["Bytes", "KB", "MB", "GB", "TB", "PB"]
+    for unit in units:
+        if size < divider:
+            return f"{pretty_round(size)} {unit}"
+        size /= divider
+    return f"{pretty_round(size)} {units[-1]}"
+
+
 # https://github.com/home-assistant/core/blob/dev/homeassistant/util/dt.py#L291
 def relative_time(date: datetime) -> str:
     def formatn(number: int, unit: str) -> str:
