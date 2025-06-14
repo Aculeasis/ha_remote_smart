@@ -1,0 +1,64 @@
+name: "HA Remote S.M.A.R.T."
+version: "1.0.0"
+slug: "ha_remote_smart"
+description: "Reads SMART data from storages and sends it to MQTT"
+arch:
+  - armv7
+  - aarch64
+  - amd64
+startup: "application"
+boot: "auto"
+init: false
+apparmor: true
+
+privileged:
+  # smartctl needs it
+  - "SYS_RAWIO"
+  # For NVMe drives
+  - "SYS_ADMIN"
+
+devices:
+  - /dev/sda
+  - /dev/sdb
+  - /dev/sdc
+  - /dev/sdd
+  - /dev/sde
+  - /dev/sdf
+  - /dev/sdg
+
+  - /dev/nvme0
+  - /dev/nvme1
+  - /dev/nvme2
+  - /dev/nvme3
+  - /dev/nvme4
+
+services:
+  - "mqtt:need"
+
+options:
+  mqtt_auto: true
+  mqtt:
+    host: "core-mosquitto"
+    port: 1883
+    username: ""
+    password: ""
+  update_interval: 600
+  missing_attribute: false
+  devices:
+    - device: sda
+      id: sda
+      name: "ULOCAL SSD (/)-250GB"
+schema:
+  mqtt_auto: bool
+  mqtt:
+    host: str
+    port: port
+    username: str
+    password: str
+  update_interval: int
+  missing_attribute: bool
+  devices:
+    - device: str
+      id: str
+      name: str?
+      cmd: str?
