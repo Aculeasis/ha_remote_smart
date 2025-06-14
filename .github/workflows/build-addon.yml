@@ -33,4 +33,4 @@ jobs:
           args: |
             --all \
             --target ha_remote_smart \
-            --docker-hub ghcr.io/Aculeasis/ha_remote_smart
+            --docker-hub ghcr.io/Aculeasis
