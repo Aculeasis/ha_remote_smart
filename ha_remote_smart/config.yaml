@@ -2,6 +2,8 @@ name: "HA Remote S.M.A.R.T."
 version: "1.0.0"
 slug: "ha_remote_smart"
 description: "Reads SMART data from storages and sends it to MQTT"
+url: https://github.com/Aculeasis/ha_remote_smart/tree/main/ha_remote_smart
+image: ghcr.io/Aculeasis/ha_remote_smart/ha_remote_smart-{arch}
 arch:
   - armv7
   - aarch64

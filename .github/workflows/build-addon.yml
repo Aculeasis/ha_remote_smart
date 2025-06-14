@@ -1,0 +1,44 @@
+name: Manual Docker Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Image tag (e.g., latest, v1.0.0)'
+        required: true
+        default: 'latest'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+#      - name: Docker meta
+#        id: meta
+#        uses: docker/metadata-action@v5
+#        with:
+#          images: ghcr.io/${{ github.repository }}
+#          tags: |
+#            type=raw,value=${{ github.event.inputs.tag }} # Use the manually provided tag
+
+      - name: Build and push Docker image
+        id: build-push
+        uses: home-assistant/builder@2025.03.0
+        with:
+          args: |
+            --all \
+            --target ha_remote_smart \
+            --docker-hub ghcr.io/Aculeasis/ha_remote_smart
