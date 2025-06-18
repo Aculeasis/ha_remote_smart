@@ -87,12 +87,12 @@ def pretty_size(size: int, divider: int = 1000) -> str:
     def pretty_round(size_: float) -> float | int:
         return round(size_, 2) if size_ % 1 >= 0.1 else int(size_)
 
-    units = ["Bytes", "KB", "MB", "GB", "TB", "PB"]
+    units = ["Bytes", "KB", "MB", "GB", "TB"]
     for unit in units:
         if size < divider:
             return f"{pretty_round(size)} {unit}"
         size /= divider
-    return f"{pretty_round(size)} {units[-1]}"
+    return f"{pretty_round(size)} PB"
 
 
 # https://github.com/home-assistant/core/blob/dev/homeassistant/util/dt.py#L291
