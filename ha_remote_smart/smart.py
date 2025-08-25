@@ -33,7 +33,7 @@ def _parse_smart(code: int, data_: dict, missing_attribute: bool) -> tuple[str, 
 
         atr = {}
         for val in data_['ata_smart_attributes']['table']:
-            atr[val['id']] = val['raw']['value'] if val['id'] != 9 else int_hours(val['raw']['string'].split(' ')[0])
+            atr[val['id']] = val['raw']['value'] if val['id'] != 9 else int_hours(val['raw']['string'])
         attr_data = {
             'Power on time': relative_time(datetime.now() - timedelta(hours=atr[9])) if 9 in atr else _UN,
             'Power cycle count': atr.get(12, _UN),
