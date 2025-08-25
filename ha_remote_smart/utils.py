@@ -117,3 +117,10 @@ def relative_time(date: datetime) -> str:
         rounded_delta = round(delta)
 
     return formatn(rounded_delta, selected_unit)
+
+
+def int_hours(data: str) -> int:
+    try:
+        return int(data.split(' ')[0])
+    except ValueError:
+        return int(data.split('+')[0].rstrip('h'))
