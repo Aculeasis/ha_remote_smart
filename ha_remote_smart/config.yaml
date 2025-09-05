@@ -1,5 +1,5 @@
 name: "HA Remote S.M.A.R.T."
-version: "1.0.3"
+version: "1.0.4"
 slug: "ha_remote_smart"
 description: "Reads SMART data from storage devices and publishes it to MQTT"
 url: "https://github.com/Aculeasis/ha_remote_smart/tree/main/ha_remote_smart"
@@ -13,28 +13,12 @@ boot: "auto"
 init: false
 apparmor: true
 udev: true
+full_access: true
 
 privileged:
-  # smartctl needs it
-  - "SYS_RAWIO"
-  # For NVMe drives
-  - "SYS_ADMIN"
-  - "DAC_READ_SEARCH"
-
-devices:
-  - /dev/sda
-  - /dev/sdb
-  - /dev/sdc
-  - /dev/sdd
-  - /dev/sde
-  - /dev/sdf
-  - /dev/sdg
-
-  - /dev/nvme0
-  - /dev/nvme1
-  - /dev/nvme2
-  - /dev/nvme3
-  - /dev/nvme4
+  - SYS_RAWIO
+  - SYS_ADMIN
+  - DAC_READ_SEARCH
 
 services:
   - "mqtt:need"
